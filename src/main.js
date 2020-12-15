@@ -1,12 +1,19 @@
-var shell = require('shelljs');
+const shell = require('shelljs');
+const { originDistPath, targetPath } = require('./config');
+const build = require('./build');
+const pull = require('./pull');
+const push = require('./push');
 
-if(!shell.which('git')) {
-    shell.echo('sorry，需要安装 Git');
-    shell.exit(1)
+if (!shell.which('git')) {
+  shell.echo('sorry，需要安装 Git');
+  shell.exit(1);
 }
 
-const basePath = `${__dirname}/demo`
-const aDistPath = `${basePath}/project-a/dist`
-const bDistPath = `${basePath}/project-b/dist`
+// 原仓库拉取代码
+pull();
 
-shell.cp('-R', aDistPath, bDistPath);
+// 项目构建，cp 构建产出
+build();
+
+// 目标仓库推送
+push();
