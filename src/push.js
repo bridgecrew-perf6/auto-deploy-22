@@ -5,6 +5,6 @@ module.exports = (branch = 'develop') => {
   shell.cd(targetPath);
   shell.exec(`git checkout ${branch}`);
   shell.exec(`git commit -am "feat: qa-release"`);
-  shell.exec('git pull origin develop');
+  shell.exec('git push origin develop');
   shell.exit(0);
 };
